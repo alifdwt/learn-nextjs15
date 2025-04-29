@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { SessionProvider } from "next-auth/react";
+import NextTopLoader from "nextjs-toploader";
 import React from "react";
 
 import "./globals.css";
@@ -51,6 +52,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
             enableSystem
             disableTransitionOnChange
           >
+            <NextTopLoader color="#FF7000" />
             {children}
           </ThemeProvider>
           <Toaster />
