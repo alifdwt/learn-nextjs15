@@ -6,6 +6,11 @@ import Question, { IQuestionDoc } from "@/database/question.model";
 import TagQuestion from "@/database/tag-question.model";
 import Tag, { ITagDoc } from "@/database/tag.model";
 import {
+  CreateQuestionParams,
+  EditQuestionParams,
+  GetQuestionParams,
+} from "@/types/action";
+import {
   ActionResponse,
   ErrorResponse,
   PaginatedSearchParams,
@@ -219,7 +224,9 @@ export async function getQuestion(
   const { questionId } = validationResult.params!;
 
   try {
-    const question = await Question.findById(questionId).populate("tags");
+    const question = await Question.findById(questionId)
+      .populate("tags")
+      .populate("author", "_id name image");
     if (!question) {
       throw new Error("Question not found");
     }
