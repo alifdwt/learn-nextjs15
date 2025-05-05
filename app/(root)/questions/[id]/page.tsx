@@ -87,7 +87,7 @@ export default async function QuestionDetailPage({ params }: RouteParams) {
       </div>
 
       <section className="my-5">
-        <AnswerForm />
+        <AnswerForm questionId={question._id} />
       </section>
     </>
   );
