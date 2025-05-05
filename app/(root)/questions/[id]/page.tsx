@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { unstable_after as unstableAfter } from "next/server";
 import React from "react";
 
 import TagCard from "@/components/cards/TagCard";
@@ -7,13 +8,18 @@ import Preview from "@/components/editor/Preview";
 import Metric from "@/components/Metric";
 import UserAvatar from "@/components/UserAvatar";
 import ROUTES from "@/constants/routes";
-import { getQuestion } from "@/lib/actions/question.action";
+import { getQuestion, incrementViews } from "@/lib/actions/question.action";
 import { formatNumber, getTimeStamp } from "@/lib/utils";
 import { RouteParams, Tag } from "@/types/global";
 
 export default async function QuestionDetailPage({ params }: RouteParams) {
   const { id } = await params;
   const { success, data: question } = await getQuestion({ questionId: id });
+
+  unstableAfter(async () => {
+    await incrementViews({ questionId: id });
+  });
+
   if (!success || !question) return redirect("/404");
 
   const { author, createdAt, answers, views, tags, title, content } = question;
