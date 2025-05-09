@@ -1,6 +1,7 @@
 import ROUTES from "@/constants/routes";
 import { IAccount } from "@/database/account.model";
 import { IUser } from "@/database/user.model";
+import { SignInWithOAuthParams } from "@/types/action";
 
 import { fetchHandler } from "./handlers/fetch";
 
@@ -65,6 +66,14 @@ export const api = {
       fetchHandler(`${API_BASE_URL}/auth/${ROUTES.SIGN_IN_WITH_OAUTH}`, {
         method: "POST",
         body: JSON.stringify({ user, provider, providerAccountId }),
+      }),
+  },
+
+  ai: {
+    getAnswer: (question: string, content: string) =>
+      fetchHandler(`${API_BASE_URL}/ai/answer`, {
+        method: "POST",
+        body: JSON.stringify({ question, content }),
       }),
   },
 };
