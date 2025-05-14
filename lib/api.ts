@@ -1,7 +1,6 @@
 import ROUTES from "@/constants/routes";
 import { IAccount } from "@/database/account.model";
 import { IUser } from "@/database/user.model";
-import { SignInWithOAuthParams } from "@/types/action";
 
 import { fetchHandler } from "./handlers/fetch";
 
@@ -70,10 +69,14 @@ export const api = {
   },
 
   ai: {
-    getAnswer: (question: string, content: string) =>
-      fetchHandler(`${API_BASE_URL}/ai/answer`, {
+    getAnswer: (
+      question: string,
+      content: string,
+      userAnswer?: string
+    ): APIResponse<string> =>
+      fetchHandler(`${API_BASE_URL}/ai/answers`, {
         method: "POST",
-        body: JSON.stringify({ question, content }),
+        body: JSON.stringify({ question, content, userAnswer }),
       }),
   },
 };

@@ -24,7 +24,6 @@ import {
 import { Input } from "@/components/ui/input";
 import ROUTES from "@/constants/routes";
 import { toast } from "@/hooks/use-toast";
-import { ActionResponse } from "@/types/global";
 
 // const formSchema = z.object({
 //   username: z.string().min(2, {
@@ -67,7 +66,7 @@ const AuthForm = <T extends FieldValues>({
       router.push(ROUTES.HOME);
     } else {
       toast({
-        title: `Error ${result.error?.status}`,
+        title: `Error`,
         description: result.error?.message,
         variant: "destructive",
       });

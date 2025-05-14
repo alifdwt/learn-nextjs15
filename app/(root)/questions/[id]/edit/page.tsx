@@ -5,7 +5,6 @@ import { auth } from "@/auth";
 import QuestionForm from "@/components/forms/QuestionForm";
 import ROUTES from "@/constants/routes";
 import { getQuestion } from "@/lib/actions/question.action";
-import { RouteParams } from "@/types/global";
 
 export default async function EditQuestionPage({ params }: RouteParams) {
   const { id } = await params;

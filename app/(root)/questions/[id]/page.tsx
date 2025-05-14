@@ -13,7 +13,6 @@ import ROUTES from "@/constants/routes";
 import { getAnswers } from "@/lib/actions/answer.action";
 import { getQuestion, incrementViews } from "@/lib/actions/question.action";
 import { formatNumber, getTimeStamp } from "@/lib/utils";
-import { RouteParams, Tag } from "@/types/global";
 
 export default async function QuestionDetailPage({ params }: RouteParams) {
   const { id } = await params;
@@ -109,7 +108,11 @@ export default async function QuestionDetailPage({ params }: RouteParams) {
       </section>
 
       <section className="my-5">
-        <AnswerForm questionId={question._id} />
+        <AnswerForm
+          questionId={question._id}
+          questionTitle={title}
+          questionContent={content}
+        />
       </section>
     </>
   );

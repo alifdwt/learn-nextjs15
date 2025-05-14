@@ -6,7 +6,6 @@ import LocalSearch from "@/components/search/LocalSearch";
 import ROUTES from "@/constants/routes";
 import { EMPTY_QUESTION } from "@/constants/state";
 import { getTagQuestions } from "@/lib/actions/tag.action";
-import { RouteParams } from "@/types/global";
 
 export default async function TagDetailPage({
   params,

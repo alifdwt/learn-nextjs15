@@ -3,7 +3,6 @@ import React from "react";
 
 import ROUTES from "@/constants/routes";
 import { getTimeStamp } from "@/lib/utils";
-import { Answer } from "@/types/global";
 
 import Preview from "../editor/Preview";
 import UserAvatar from "../UserAvatar";

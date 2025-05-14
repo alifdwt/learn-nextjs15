@@ -6,12 +6,6 @@ import { revalidatePath } from "next/cache";
 import ROUTES from "@/constants/routes";
 import { Question } from "@/database";
 import Answer, { IAnswerDoc } from "@/database/answer.model";
-import { CreateAnswerParams, GetAnswersParams } from "@/types/action";
-import {
-  ActionResponse,
-  Answer as AnswerType,
-  ErrorResponse,
-} from "@/types/global";
 
 import action from "../handlers/action";
 import handleError from "../handlers/error";
@@ -74,7 +68,7 @@ export async function createAnswer(
 
 export async function getAnswers(params: GetAnswersParams): Promise<
   ActionResponse<{
-    answers: AnswerType[];
+    answers: Answer[];
     isNext: boolean;
     totalAnswers: number;
   } | null>

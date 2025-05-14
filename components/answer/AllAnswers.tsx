@@ -1,7 +1,6 @@
 import React from "react";
 
 import { EMPTY_ANSWERS } from "@/constants/state";
-import { ActionResponse, Answer } from "@/types/global";
 
 import AnswerCard from "../cards/AnswerCard";
 import DataRenderer from "../DataRenderer";

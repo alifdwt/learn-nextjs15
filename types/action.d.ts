@@ -1,7 +1,5 @@
-import { PaginatedSearchParams } from "./global";
-
 interface SignInWithOAuthParams {
-  provider: "google" | "github";
+  provider: "github" | "google";
   providerAccountId: string;
   user: {
     email: string;
@@ -32,7 +30,7 @@ interface GetQuestionParams {
   questionId: string;
 }
 
-interface GetTagQuestionParams extends Omit<PaginatedSearchParams, "filter"> {
+interface GetTagQuestionsParams extends Omit<PaginatedSearchParams, "filter"> {
   tagId: string;
 }
 

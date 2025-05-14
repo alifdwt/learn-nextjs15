@@ -13,7 +13,6 @@ import ROUTES from "@/constants/routes";
 import { toast } from "@/hooks/use-toast";
 import { createQuestion, editQuestion } from "@/lib/actions/question.action";
 import { AskQuestionSchema } from "@/lib/validations";
-import { Question } from "@/types/global";
 
 import TagCard from "../cards/TagCard";
 import { Button } from "../ui/button";
@@ -106,10 +105,11 @@ const QuestionForm = ({ question, isEdit = false }: Params) => {
             title: "Success",
             description: "Question updated successfully",
           });
-          if (result.data) router.push(ROUTES.QUESTION(result.data._id));
+          if (result.data)
+            router.push(ROUTES.QUESTION(String(result.data._id)));
         } else {
           toast({
-            title: `Error ${result.error?.status}`,
+            title: `Error`,
             description: result.error?.message || "Something went wrong",
             variant: "destructive",
           });
@@ -126,7 +126,7 @@ const QuestionForm = ({ question, isEdit = false }: Params) => {
         if (result.data) router.push(ROUTES.QUESTION(result.data._id));
       } else {
         toast({
-          title: `Error ${result.error?.status}`,
+          title: `Error`,
           description: result.error?.message || "Something went wrong",
           variant: "destructive",
         });

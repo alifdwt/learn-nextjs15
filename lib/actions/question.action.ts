@@ -5,18 +5,6 @@ import mongoose, { FilterQuery } from "mongoose";
 import Question, { IQuestionDoc } from "@/database/question.model";
 import TagQuestion from "@/database/tag-question.model";
 import Tag, { ITagDoc } from "@/database/tag.model";
-import {
-  CreateQuestionParams,
-  EditQuestionParams,
-  GetQuestionParams,
-  IncrementViewsParams,
-} from "@/types/action";
-import {
-  ActionResponse,
-  ErrorResponse,
-  PaginatedSearchParams,
-  Question as QuestionType,
-} from "@/types/global";
 
 import action from "../handlers/action";
 import handleError from "../handlers/error";
@@ -30,7 +18,7 @@ import {
 
 export async function createQuestion(
   params: CreateQuestionParams
-): Promise<ActionResponse<QuestionType | null>> {
+): Promise<ActionResponse<Question | null>> {
   const validationResult = await action({
     params,
     schema: AskQuestionSchema,
@@ -212,7 +200,7 @@ export async function editQuestion(
 
 export async function getQuestion(
   params: GetQuestionParams
-): Promise<ActionResponse<QuestionType | null>> {
+): Promise<ActionResponse<Question | null>> {
   const validationResult = await action({
     params,
     schema: GetQuestionSchema,
@@ -244,9 +232,7 @@ export async function getQuestion(
 
 export async function getQuestions(
   params: PaginatedSearchParams
-): Promise<
-  ActionResponse<{ questions: QuestionType[]; isNext: boolean } | null>
-> {
+): Promise<ActionResponse<{ questions: Question[]; isNext: boolean } | null>> {
   const validationResult = await action({
     params,
     schema: PaginatedSearchParamsSchema,
