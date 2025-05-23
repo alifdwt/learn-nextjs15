@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { unstable_after as unstableAfter } from "next/server";
-import React from "react";
+import React, { Suspense } from "react";
 
 import AllAnswers from "@/components/answer/AllAnswers";
 import TagCard from "@/components/cards/TagCard";
@@ -13,6 +13,7 @@ import Votes from "@/components/votes/Votes";
 import ROUTES from "@/constants/routes";
 import { getAnswers } from "@/lib/actions/answer.action";
 import { getQuestion, incrementViews } from "@/lib/actions/question.action";
+import { hasVoted } from "@/lib/actions/vote.action";
 import { formatNumber, getTimeStamp } from "@/lib/utils";
 
 export default async function QuestionDetailPage({ params }: RouteParams) {
@@ -34,6 +35,11 @@ export default async function QuestionDetailPage({ params }: RouteParams) {
     page: 1,
     pageSize: 10,
     filter: "latest",
+  });
+
+  const hasVotedPromise = hasVoted({
+    targetId: question._id,
+    targetType: "question",
   });
 
   const { author, createdAt, answers, views, tags, title, content } = question;
@@ -58,12 +64,15 @@ export default async function QuestionDetailPage({ params }: RouteParams) {
           </div>
 
           <div className="flex justify-end">
-            <Votes
-              upvotes={question.upvotes}
-              hasUpvoted={true}
-              downvotes={question.downvotes}
-              hasDownvoted={false}
-            />
+            <Suspense fallback={<div>Loading...</div>}>
+              <Votes
+                upvotes={question.upvotes}
+                downvotes={question.downvotes}
+                targetType="question"
+                targetId={question._id}
+                hasVotedPromise={hasVotedPromise}
+              />
+            </Suspense>
           </div>
         </div>
 
